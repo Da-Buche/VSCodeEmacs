@@ -18,7 +18,7 @@ export function activate(context: vscode.ExtensionContext): void {
         ],
         cursorMoves: string[] = [
             "cursorUp", "cursorDown", "cursorLeft", "cursorRight",
-            "cursorHome", "cursorEnd",
+            "cursorHome", "cursorLineStart", "cursorEnd",
             "cursorWordLeft", "cursorWordRight",
             "cursorPageDown", "cursorPageUp",
             "cursorTop", "cursorBottom"
