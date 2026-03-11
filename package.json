@@ -555,12 +555,12 @@
             },
             {
                 "key": "ctrl+x 2",
-                "command": "workbench.action.splitEditor",
+                "command": "workbench.action.splitEditorUp",
                 "when": "(!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+x 3",
-                "command": "workbench.action.toggleEditorGroupLayout",
+                "command": "workbench.action.splitEditorLeft",
                 "when": "(!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
