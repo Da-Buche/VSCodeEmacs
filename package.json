@@ -35,614 +35,631 @@
         "keybindings": [
             {
                 "key": "ctrl+x ctrl+c",
-                "command": "workbench.action.quit"
+                "command": "workbench.action.quit",
+                "when": "(!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "right",
                 "command": "emacs.cursorRight",
-                "when": "editorTextFocus"
+                "when": "editorTextFocus && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+f",
                 "command": "emacs.cursorRight",
-                "when": "editorTextFocus"
+                "when": "editorTextFocus && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+f",
                 "command": "emacs.cursorRight",
-                "when": "terminalFocus"
+                "when": "terminalFocus && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "left",
                 "command": "emacs.cursorLeft",
-                "when": "editorTextFocus"
+                "when": "editorTextFocus && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+b",
                 "command": "emacs.cursorLeft",
-                "when": "editorTextFocus"
+                "when": "editorTextFocus && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "up",
                 "command": "emacs.cursorUp",
-                "when": "editorTextFocus && !suggestWidgetVisible"
+                "when": "editorTextFocus && !suggestWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "up",
                 "command": "closeFindWidget",
-                "when": "editorFocus && findWidgetVisible"
+                "when": "editorFocus && findWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+p",
                 "command": "emacs.cursorUp",
-                "when": "editorTextFocus && !suggestWidgetVisible"
+                "when": "editorTextFocus && !suggestWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+p",
                 "command": "emacs.cursorUp",
-                "when": "terminalFocus"
+                "when": "terminalFocus && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+p",
                 "command": "closeFindWidget",
-                "when": "editorFocus && findWidgetVisible"
+                "when": "editorFocus && findWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "down",
                 "command": "emacs.cursorDown",
-                "when": "editorTextFocus && !suggestWidgetVisible"
+                "when": "editorTextFocus && !suggestWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "down",
                 "command": "closeFindWidget",
-                "when": "editorFocus && findWidgetVisible"
+                "when": "editorFocus && findWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+n",
                 "command": "emacs.cursorDown",
-                "when": "editorTextFocus && !suggestWidgetVisible"
+                "when": "editorTextFocus && !suggestWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+n",
                 "command": "closeFindWidget",
-                "when": "editorFocus && findWidgetVisible"
+                "when": "editorFocus && findWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "home",
                 "command": "emacs.cursorHome",
-                "when": "editorTextFocus"
+                "when": "editorTextFocus && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+a",
                 "command": "emacs.cursorHome",
-                "when": "editorTextFocus"
+                "when": "editorTextFocus && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "end",
                 "command": "emacs.cursorEnd",
-                "when": "editorTextFocus"
+                "when": "editorTextFocus && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+e",
                 "command": "emacs.cursorEnd",
-                "when": "editorTextFocus"
+                "when": "editorTextFocus && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+e",
                 "command": "emacs.cursorEnd",
-                "when": "terminalFocus"
+                "when": "terminalFocus && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "alt+f",
                 "mac": "cmd+f",
                 "command": "emacs.cursorWordRight",
-                "when": "editorTextFocus"
+                "when": "editorTextFocus && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "alt+b",
                 "mac": "cmd+f",
                 "command": "emacs.cursorWordLeft",
-                "when": "editorTextFocus"
+                "when": "editorTextFocus && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "pagedown",
                 "command": "emacs.cursorPageDown",
-                "when": "editorTextFocus && !suggestWidgetVisible"
+                "when": "editorTextFocus && !suggestWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "pagedown",
                 "command": "closeFindWidget",
-                "when": "editorFocus && findWidgetVisible"
+                "when": "editorFocus && findWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+v",
                 "command": "emacs.cursorPageDown",
-                "when": "editorTextFocus && !suggestWidgetVisible"
+                "when": "editorTextFocus && !suggestWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+v",
                 "command": "closeFindWidget",
-                "when": "editorFocus && findWidgetVisible"
+                "when": "editorFocus && findWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "pageup",
                 "command": "emacs.cursorPageUp",
-                "when": "editorTextFocus && !suggestWidgetVisible"
+                "when": "editorTextFocus && !suggestWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "pageup",
                 "command": "closeFindWidget",
-                "when": "editorFocus && findWidgetVisible"
+                "when": "editorFocus && findWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "alt+v",
                 "mac": "cmd+v",
                 "command": "emacs.cursorPageUp",
-                "when": "editorTextFocus && !suggestWidgetVisible"
+                "when": "editorTextFocus && !suggestWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "alt+v",
                 "mac": "cmd+v",
                 "command": "closeFindWidget",
-                "when": "editorFocus && findWidgetVisible"
+                "when": "editorFocus && findWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "alt+shift+.",
                 "mac": "cmd+shift+.",
                 "command": "emacs.cursorBottom",
-                "when": "editorTextFocus"
+                "when": "editorTextFocus && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "alt+shift+.",
                 "mac": "cmd+shift+.",
                 "command": "closeFindWidget",
-                "when": "editorFocus && findWidgetVisible"
+                "when": "editorFocus && findWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "alt+shift+,",
                 "mac": "cmd+shift+,",
                 "command": "emacs.cursorTop",
-                "when": "editorTextFocus"
+                "when": "editorTextFocus && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "alt+shift+,",
                 "mac": "cmd+shift+,",
                 "command": "closeFindWidget",
-                "when": "editorFocus && findWidgetVisible"
+                "when": "editorFocus && findWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "alt+shift+1",
                 "mac": "cmd+shift+1",
-                "command": "emacs.shellCommand"
+                "command": "emacs.shellCommand",
+                "when": "(!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "alt+g g",
                 "mac": "cmd+g g",
-                "command": "workbench.action.gotoLine"
+                "command": "workbench.action.gotoLine",
+                "when": "(!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "alt+g n",
                 "mac": "cmd+g n",
-                "command": "editor.action.marker.next"
+                "command": "editor.action.marker.next",
+                "when": "(!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "alt+g p",
                 "mac": "cmd+g p",
-                "command": "editor.action.marker.prev"
+                "command": "editor.action.marker.prev",
+                "when": "(!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "alt+g g",
                 "mac": "cmd+g g",
                 "command": "closeFindWidget",
-                "when": "editorFocus && findWidgetVisible"
+                "when": "editorFocus && findWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+s",
                 "command": "actions.find",
-                "when": "!findWidgetVisible"
+                "when": "!findWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "alt+shift+5",
                 "mac": "cmd+shift+5",
                 "command": "editor.action.startFindReplaceAction",
-                "when": "editorFocus"
+                "when": "editorFocus && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "command": "editor.action.replaceOne",
                 "key": "ctrl+enter",
-                "when": "editorFocus && findWidgetVisible"
+                "when": "editorFocus && findWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+s",
                 "command": "editor.action.nextMatchFindAction",
-                "when": "findWidgetVisible"
+                "when": "findWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+r",
                 "command": "actions.find",
-                "when": "!findWidgetVisible"
+                "when": "!findWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+r",
                 "command": "editor.action.previousMatchFindAction",
-                "when": "findWidgetVisible"
+                "when": "findWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+alt+n",
                 "mac": "ctrl+cmd+n",
                 "command": "editor.action.addSelectionToNextFindMatch",
-                "when": "editorFocus"
+                "when": "editorFocus && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "backspace",
                 "command": "emacs.deleteLeft",
-                "when": "editorTextFocus && !editorReadonly"
+                "when": "editorTextFocus && !editorReadonly && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "delete",
                 "command": "emacs.deleteRight",
-                "when": "editorTextFocus && !editorReadonly"
+                "when": "editorTextFocus && !editorReadonly && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+d",
                 "command": "deleteRight",
-                "when": "editorTextFocus && !editorReadonly"
+                "when": "editorTextFocus && !editorReadonly && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+h",
                 "command": "deleteLeft",
-                "when": "editorTextFocus && !editorReadonly"
+                "when": "editorTextFocus && !editorReadonly && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "alt+d",
                 "mac": "cmd+d",
                 "command": "deleteWordRight",
-                "when": "editorTextFocus && !editorReadonly"
+                "when": "editorTextFocus && !editorReadonly && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+k",
                 "command": "emacs.C-k",
-                "when": "editorTextFocus && !editorReadonly"
+                "when": "editorTextFocus && !editorReadonly && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+w",
                 "command": "emacs.C-w",
-                "when": "editorTextFocus && !editorReadonly"
+                "when": "editorTextFocus && !editorReadonly && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+w",
                 "command": "closeFindWidget",
-                "when": "editorFocus && findWidgetVisible"
+                "when": "editorFocus && findWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "alt+w",
                 "mac": "cmd+w",
                 "command": "emacs.M-w",
-                "when": "editorTextFocus"
+                "when": "editorTextFocus && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "alt+w",
                 "mac": "cmd+w",
                 "command": "closeFindWidget",
-                "when": "editorFocus && findWidgetVisible"
+                "when": "editorFocus && findWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+y",
                 "command": "emacs.C-y",
-                "when": "editorTextFocus && !editorReadonly"
+                "when": "editorTextFocus && !editorReadonly && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+y",
                 "command": "closeFindWidget",
-                "when": "editorFocus && findWidgetVisible"
+                "when": "editorFocus && findWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+m",
                 "command": "emacs.C-j",
-                "when": "editorTextFocus && !editorReadonly"
+                "when": "editorTextFocus && !editorReadonly && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+j",
                 "command": "emacs.C-j",
-                "when": "editorTextFocus && !editorReadonly"
+                "when": "editorTextFocus && !editorReadonly && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+j",
                 "command": "closeFindWidget",
-                "when": "editorFocus && findWidgetVisible"
+                "when": "editorFocus && findWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+x ctrl+o",
                 "command": "emacs.C-x_C-o",
-                "when": "editorTextFocus && !editorReadonly"
+                "when": "editorTextFocus && !editorReadonly && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+x ctrl+o",
                 "command": "closeFindWidget",
-                "when": "editorFocus && findWidgetVisible"
+                "when": "editorFocus && findWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+x h",
                 "command": "editor.action.selectAll",
-                "when": "editorTextFocus"
+                "when": "editorTextFocus && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+x h",
                 "command": "closeFindWidget",
-                "when": "editorFocus && findWidgetVisible"
+                "when": "editorFocus && findWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+x u",
                 "command": "emacs.C-x_u",
-                "when": "editorTextFocus && !editorReadonly"
+                "when": "editorTextFocus && !editorReadonly && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+x u",
                 "command": "closeFindWidget",
-                "when": "editorFocus && findWidgetVisible"
+                "when": "editorFocus && findWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+x z",
-                "command": "workbench.action.toggleZenMode"
+                "command": "workbench.action.toggleZenMode",
+                "when": "(!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+/",
                 "command": "emacs.C-/",
-                "when": "editorTextFocus && !editorReadonly"
+                "when": "editorTextFocus && !editorReadonly && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+/",
                 "command": "closeFindWidget",
-                "when": "editorFocus && findWidgetVisible"
+                "when": "editorFocus && findWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+;",
                 "command": "editor.action.commentLine",
-                "when": "editorTextFocus && !editorReadonly"
+                "when": "editorTextFocus && !editorReadonly && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+;",
                 "command": "closeFindWidget",
-                "when": "editorFocus && findWidgetVisible"
+                "when": "editorFocus && findWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "alt+;",
                 "mac": "cmd+;",
                 "command": "editor.action.blockComment",
-                "when": "editorTextFocus && !editorReadonly"
+                "when": "editorTextFocus && !editorReadonly && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "alt+;",
                 "mac": "cmd+;",
                 "command": "closeFindWidget",
-                "when": "editorFocus && findWidgetVisible"
+                "when": "editorFocus && findWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+l",
                 "command": "emacs.C-l",
-                "when": "editorTextFocus"
+                "when": "editorTextFocus && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+g",
                 "command": "emacs.C-g",
-                "when": "editorTextFocus"
+                "when": "editorTextFocus && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+g",
                 "command": "closeFindWidget",
-                "when": "editorFocus && findWidgetVisible"
+                "when": "editorFocus && findWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+g",
                 "command": "emacs.exitMarkMode",
-                "when": "editorTextFocus && editorHasSelection"
+                "when": "editorTextFocus && editorHasSelection && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+g",
                 "command": "closeReferenceSearchEditor",
-                "when": "inReferenceSearchEditor && !config.editor.stablePeek"
+                "when": "inReferenceSearchEditor && !config.editor.stablePeek && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+g",
                 "command": "closeReferenceSearch",
-                "when": "referenceSearchVisible && !config.editor.stablePeek"
+                "when": "referenceSearchVisible && !config.editor.stablePeek && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+g",
                 "command": "removeSecondaryCursors",
-                "when": "editorHasMultipleSelections && editorTextFocus"
+                "when": "editorHasMultipleSelections && editorTextFocus && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+g",
                 "command": "closeBreakpointWidget",
-                "when": "breakpointWidgetVisible && editorFocus"
+                "when": "breakpointWidgetVisible && editorFocus && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+g",
                 "command": "leaveSnippet",
-                "when": "editorTextFocus && inSnippetMode"
+                "when": "editorTextFocus && inSnippetMode && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+g",
                 "command": "closeMarkersNavigation",
-                "when": "editorFocus && markersNavigationVisible"
+                "when": "editorFocus && markersNavigationVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+g",
                 "command": "closeParameterHints",
-                "when": "editorTextFocus && parameterHintsVisible"
+                "when": "editorTextFocus && parameterHintsVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+g",
                 "command": "hideSuggestWidget",
-                "when": "editorTextFocus && suggestWidgetVisible"
+                "when": "editorTextFocus && suggestWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+g",
                 "command": "cancelRenameInput",
-                "when": "editorFocus && renameInputVisible"
+                "when": "editorFocus && renameInputVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+g",
                 "command": "closeAccessibilityHelp",
-                "when": "accessibilityHelpWidgetVisible && editorFocus"
+                "when": "accessibilityHelpWidgetVisible && editorFocus && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+g",
                 "command": "closeReplaceInFilesWidget",
-                "when": "replaceInputBoxFocus && searchViewletVisible"
+                "when": "replaceInputBoxFocus && searchViewletVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+g",
                 "command": "workbench.action.closeMessages",
-                "when": "globalMessageVisible"
+                "when": "globalMessageVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+g",
                 "command": "workbench.action.closeQuickOpen",
-                "when": "inQuickOpen"
+                "when": "inQuickOpen && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+space",
                 "command": "emacs.enterMarkMode",
-                "when": "editorTextFocus"
+                "when": "editorTextFocus && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+x ctrl+f",
-                "command": "workbench.action.quickOpen"
+                "command": "workbench.action.quickOpen",
+                "when": "(!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+x ctrl+s",
                 "command": "workbench.action.files.save",
-                "when": "editorTextFocus"
+                "when": "editorTextFocus && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+x ctrl+w",
                 "command": "workbench.action.files.saveAs",
-                "when": "editorTextFocus"
+                "when": "editorTextFocus && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+x k",
-                "command": "workbench.action.closeActiveEditor"
+                "command": "workbench.action.closeActiveEditor",
+                "when": "(!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+x ctrl-k",
-                "command": "workbench.action.closeAllEditors"
+                "command": "workbench.action.closeAllEditors",
+                "when": "(!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+x k",
                 "command": "workbench.action.closeWindow",
-                "when": "!editorIsOpen"
+                "when": "!editorIsOpen && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+x ctrl+n",
-                "command": "workbench.action.newWindow"
+                "command": "workbench.action.newWindow",
+                "when": "(!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+x 1",
-                "command": "workbench.action.closeEditorsInOtherGroups"
+                "command": "workbench.action.closeEditorsInOtherGroups",
+                "when": "(!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+x 2",
-                "command": "workbench.action.splitEditor"
+                "command": "workbench.action.splitEditor",
+                "when": "(!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+x 3",
-                "command": "workbench.action.toggleEditorGroupLayout"
+                "command": "workbench.action.toggleEditorGroupLayout",
+                "when": "(!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+x o",
-                "command": "workbench.action.navigateEditorGroups"
+                "command": "workbench.action.navigateEditorGroups",
+                "when": "(!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+p",
                 "command": "showPrevParameterHint",
-                "when": "editorTextFocus && parameterHintsVisible"
+                "when": "editorTextFocus && parameterHintsVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+n",
                 "command": "showNextParameterHint",
-                "when": "editorTextFocus && parameterHintsVisible"
+                "when": "editorTextFocus && parameterHintsVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+p",
                 "command": "selectPrevQuickFix",
-                "when": "editorFocus && quickFixWidgetVisible"
+                "when": "editorFocus && quickFixWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+n",
                 "command": "selectNextQuickFix",
-                "when": "editorFocus && quickFixWidgetVisible"
+                "when": "editorFocus && quickFixWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+p",
                 "command": "selectPrevSuggestion",
-                "when": "editorTextFocus && suggestWidgetVisible"
+                "when": "editorTextFocus && suggestWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+n",
                 "command": "selectNextSuggestion",
-                "when": "editorTextFocus && suggestWidgetVisible"
+                "when": "editorTextFocus && suggestWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+p",
                 "command": "workbench.action.quickOpenNavigatePrevious",
-                "when": "inQuickOpen"
+                "when": "inQuickOpen && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+n",
                 "command": "workbench.action.quickOpenNavigateNext",
-                "when": "inQuickOpen"
+                "when": "inQuickOpen && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+'",
                 "command": "editor.action.triggerSuggest",
-                "when": "editorTextFocus"
+                "when": "editorTextFocus && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+'",
                 "command": "toggleSuggestionDetails",
-                "when": "editorTextFocus && suggestWidgetVisible"
+                "when": "editorTextFocus && suggestWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+shift+'",
                 "command": "editor.action.triggerParameterHints",
-                "when": "editorTextFocus"
+                "when": "editorTextFocus && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "alt+x",
                 "mac": "cmd+x",
-                "command": "workbench.action.showCommands"
+                "command": "workbench.action.showCommands",
+                "when": "(!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+alt+space",
                 "mac": "ctrl+cmd+space",
-                "command": "workbench.action.toggleSidebarVisibility"
+                "command": "workbench.action.toggleSidebarVisibility",
+                "when": "(!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+x b",
-                "command": "workbench.action.showAllEditors"
+                "command": "workbench.action.showAllEditors",
+                "when": "(!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+shift+backspace",
                 "command": "emacs.C-S_bs",
-                "when": "editorTextFocus"
+                "when": "editorTextFocus && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+x ctrl+l",
                 "command": "editor.action.transformToLowercase",
-                "when": "editorTextFocus && !editorReadonly"
+                "when": "editorTextFocus && !editorReadonly && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+x ctrl+u",
                 "command": "editor.action.transformToUppercase",
-                "when": "editorTextFocus && !editorReadonly"
+                "when": "editorTextFocus && !editorReadonly && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "alt+backspace",
                 "mac": "cmd+backspace",
                 "command": "deleteWordLeft",
-                "when": "editorTextFocus && !editorReadonly"
+                "when": "editorTextFocus && !editorReadonly && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             }
         ]
     },
