@@ -549,6 +549,11 @@
                 "when": "(!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
+                "key": "ctrl+x 0",
+                "command": "workbench.action.closeActiveEditor",
+                "when": "(!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
+            },
+            {
                 "key": "ctrl+x 1",
                 "command": "workbench.action.closeEditorsInOtherGroups",
                 "when": "(!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
