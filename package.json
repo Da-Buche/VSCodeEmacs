@@ -665,6 +665,16 @@
                 "mac": "cmd+backspace",
                 "command": "deleteWordLeft",
                 "when": "editorTextFocus && !editorReadonly && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
+            },
+            {
+                "key": "ctrl+x [",
+                "command": "emacs.cursorTop",
+                "when": "editorTextFocus && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
+            },
+            {
+                "key": "ctrl+x ]",
+                "command": "emacs.cursorBottom",
+                "when": "editorTextFocus && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             }
         ]
     },
