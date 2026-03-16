@@ -732,6 +732,11 @@
                 "key": "ctrl+x ]",
                 "command": "emacs.cursorBottom",
                 "when": "editorTextFocus && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
+            },
+            {
+                "key": "ctrl+x space",
+                "command": "editor.action.toggleColumnSelection",
+                "when": "editorTextFocus && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             }
         ]
     },
