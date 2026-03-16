@@ -104,6 +104,46 @@
                 "when": "editorTextFocus && !suggestWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
+                "key": "ctrl+up",
+                "command": "emacs.cursorPrevBlankLine",
+                "when": "editorTextFocus && !suggestWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
+            },
+            {
+                "key": "ctrl+shift+up",
+                "command": "emacs.cursorPrevBlankLineSelect",
+                "when": "editorTextFocus && !suggestWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
+            },
+            {
+                "key": "ctrl+down",
+                "command": "emacs.cursorNextBlankLine",
+                "when": "editorTextFocus && !suggestWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
+            },
+            {
+                "key": "ctrl+shift+down",
+                "command": "emacs.cursorNextBlankLineSelect",
+                "when": "editorTextFocus && !suggestWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
+            },
+            {
+                "key": "ctrl+right",
+                "command": "emacs.cursorWordRight",
+                "when": "editorTextFocus && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
+            },
+            {
+                "key": "ctrl+shift+right",
+                "command": "cursorWordRightSelect",
+                "when": "editorTextFocus && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
+            },
+            {
+                "key": "ctrl+left",
+                "command": "emacs.cursorWordLeft",
+                "when": "editorTextFocus && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
+            },
+            {
+                "key": "ctrl+shift+left",
+                "command": "cursorWordLeftSelect",
+                "when": "editorTextFocus && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
+            },
+            {
                 "key": "ctrl+n",
                 "command": "closeFindWidget",
                 "when": "editorFocus && findWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"

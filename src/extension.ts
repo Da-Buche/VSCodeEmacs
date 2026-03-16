@@ -43,6 +43,50 @@ export function activate(context: vscode.ExtensionContext): void {
         )
     });
 
+    context.subscriptions.push(vscode.commands.registerCommand(
+        "emacs.cursorPrevBlankLine", () => {
+            if (inMarkMode) {
+                markHasMoved = true;
+            }
+            vscode.commands.executeCommand("cursorMove", {
+                to: "prevBlankLine",
+                select: inMarkMode
+            });
+        })
+    );
+
+    context.subscriptions.push(vscode.commands.registerCommand(
+        "emacs.cursorPrevBlankLineSelect", () => {
+            markHasMoved = true;
+            vscode.commands.executeCommand("cursorMove", {
+                to: "prevBlankLine",
+                select: true
+            });
+        })
+    );
+
+    context.subscriptions.push(vscode.commands.registerCommand(
+        "emacs.cursorNextBlankLine", () => {
+            if (inMarkMode) {
+                markHasMoved = true;
+            }
+            vscode.commands.executeCommand("cursorMove", {
+                to: "nextBlankLine",
+                select: inMarkMode
+            });
+        })
+    );
+
+    context.subscriptions.push(vscode.commands.registerCommand(
+        "emacs.cursorNextBlankLineSelect", () => {
+            markHasMoved = true;
+            vscode.commands.executeCommand("cursorMove", {
+                to: "nextBlankLine",
+                select: true
+            });
+        })
+    );
+
     initMarkMode(context);
 }
 
