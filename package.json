@@ -698,6 +698,40 @@
                 "when": "editorTextFocus && !editorReadonly && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
+                "key": "ctrl+alt+right",
+                "mac": "ctrl+cmd+right",
+                "command": "emacs.C-M-right",
+                "when": "editorTextFocus && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
+            },
+            {
+                "key": "ctrl+alt+left",
+                "mac": "ctrl+cmd+left",
+                "command": "emacs.C-M-left",
+                "when": "editorTextFocus && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
+            },
+            {
+                "key": "ctrl+alt+shift+right",
+                "command": "emacs.C-M-S-right",
+                "when": "editorTextFocus && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
+            },
+            {
+                "key": "ctrl+alt+shift+left",
+                "command": "emacs.C-M-S-left",
+                "when": "editorTextFocus && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
+            },
+            {
+                "key": "ctrl+alt+up",
+                "mac": "ctrl+cmd+up",
+                "command": "emacs.C-M-up",
+                "when": "editorTextFocus && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
+            },
+            {
+                "key": "ctrl+alt+down",
+                "mac": "ctrl+cmd+down",
+                "command": "emacs.C-M-down",
+                "when": "editorTextFocus && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
+            },
+            {
                 "key": "ctrl+x b",
                 "command": "workbench.action.showAllEditors",
                 "when": "(!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"

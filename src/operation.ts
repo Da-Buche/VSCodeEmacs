@@ -20,6 +20,24 @@ export class Operation {
             'C-M-space': () => {
                 this.editor.selectNextExpression();
             },
+            'C-M-right': () => {
+                this.editor.moveAfterNextExpression();
+            },
+            'C-M-left': () => {
+                this.editor.moveBeforePreviousExpression();
+            },
+            'C-M-S-right': () => {
+                this.editor.selectAfterNextExpression();
+            },
+            'C-M-S-left': () => {
+                this.editor.selectBeforePreviousExpression();
+            },
+            'C-M-up': () => {
+                this.editor.leaveParentExpression();
+            },
+            'C-M-down': () => {
+                this.editor.enterNextExpression();
+            },
             'C-w': () => {
                 this.editor.cut()
             },

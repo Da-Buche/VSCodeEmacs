@@ -121,6 +121,15 @@ export class Editor {
 		return document.positionAt(offset)
 	}
 
+	private skipWhitespacesBackward(document: vscode.TextDocument, from: vscode.Position): vscode.Position {
+		const text = document.getText()
+		let offset = document.offsetAt(from)
+		while (offset > 0 && /\s/.test(text[offset - 1])) {
+			offset -= 1
+		}
+		return document.positionAt(offset)
+	}
+
 	private async getSmartSelectionRangeAt(position: vscode.Position): Promise<vscode.Range> {
 		const editor = vscode.window.activeTextEditor
 		const previousSelection = editor.selection
@@ -262,6 +271,202 @@ export class Editor {
 		return new vscode.Range(start, next)
 	}
 
+	private findNextStructuralExpressionRange(from: vscode.Position): vscode.Range {
+		const document = vscode.window.activeTextEditor.document
+		const text = document.getText()
+		let offset = document.offsetAt(from)
+
+		while (offset < text.length) {
+			if (text.substr(offset, 3) === '"""') {
+				return this.findQuotedRange(document, offset, '"""')
+			}
+
+			const token = text[offset]
+			if (token === '(') {
+				return this.findDelimitedRange(document, offset, '(', ')')
+			}
+			if (token === '[') {
+				return this.findDelimitedRange(document, offset, '[', ']')
+			}
+			if (token === '{') {
+				return this.findDelimitedRange(document, offset, '{', '}')
+			}
+			if (token === '"' || token === "'") {
+				return this.findQuotedRange(document, offset, token)
+			}
+
+			offset += 1
+		}
+
+		return null
+	}
+
+	private findDelimitedRangeBackward(document: vscode.TextDocument, endOffset: number, open: string, close: string): vscode.Range {
+		const text = document.getText()
+		let depth = 1
+		let offset = endOffset - 2
+
+		while (offset >= 0) {
+			if (text[offset] === close) {
+				depth += 1
+			} else if (text[offset] === open) {
+				depth -= 1
+				if (depth === 0) {
+					return new vscode.Range(document.positionAt(offset), document.positionAt(endOffset))
+				}
+			}
+			offset -= 1
+		}
+
+		return new vscode.Range(document.positionAt(0), document.positionAt(endOffset))
+	}
+
+	private findQuotedRangeBackward(document: vscode.TextDocument, endOffset: number, quote: string): vscode.Range {
+		const text = document.getText()
+		let offset = endOffset - quote.length - 1
+
+		while (offset >= 0) {
+			if (text.substr(offset, quote.length) === quote) {
+				// Ignore escaped single-character quotes.
+				if (quote.length === 1) {
+					let backslashes = 0
+					let cursor = offset - 1
+					while (cursor >= 0 && text[cursor] === "\\") {
+						backslashes += 1
+						cursor -= 1
+					}
+					if (backslashes % 2 === 1) {
+						offset -= 1
+						continue
+					}
+				}
+
+				return new vscode.Range(document.positionAt(offset), document.positionAt(endOffset))
+			}
+			offset -= 1
+		}
+
+		return new vscode.Range(document.positionAt(0), document.positionAt(endOffset))
+	}
+
+	private async findPreviousExpressionRange(from: vscode.Position): Promise<vscode.Range> {
+		const editor = vscode.window.activeTextEditor
+		const document = editor.document
+		const text = document.getText()
+		const end = this.skipWhitespacesBackward(document, from)
+		const endOffset = document.offsetAt(end)
+
+		if (endOffset <= 0) {
+			return null
+		}
+
+		const previousToken = text[endOffset - 1]
+		if (previousToken === ')') {
+			return this.findDelimitedRangeBackward(document, endOffset, '(', ')')
+		}
+		if (previousToken === ']') {
+			return this.findDelimitedRangeBackward(document, endOffset, '[', ']')
+		}
+		if (previousToken === '}') {
+			return this.findDelimitedRangeBackward(document, endOffset, '{', '}')
+		}
+		if (endOffset >= 3 && text.substr(endOffset - 3, 3) === '"""') {
+			return this.findQuotedRangeBackward(document, endOffset, '"""')
+		}
+		if (previousToken === '"' || previousToken === "'") {
+			return this.findQuotedRangeBackward(document, endOffset, previousToken)
+		}
+
+		let startOffset = endOffset - 1
+		if (/\w/.test(text[startOffset])) {
+			while (startOffset > 0 && /\w/.test(text[startOffset - 1])) {
+				startOffset -= 1
+			}
+		}
+
+		return new vscode.Range(document.positionAt(startOffset), document.positionAt(endOffset))
+	}
+
+	private findContainingDelimitedExpression(document: vscode.TextDocument, cursorOffset: number): { start: vscode.Position, inside: vscode.Position } {
+		const text = document.getText()
+		const closeByOpen: { [key: string]: string } = {
+			'(': ')',
+			'[': ']',
+			'{': '}'
+		}
+		const stack: { open: string, offset: number }[] = []
+
+		for (let i = 0; i < cursorOffset; i += 1) {
+			const token = text[i]
+			if (token === '(' || token === '[' || token === '{') {
+				stack.push({ open: token, offset: i })
+				continue
+			}
+
+			if (token === ')' || token === ']' || token === '}') {
+				if (stack.length === 0) {
+					continue
+				}
+
+				const top = stack[stack.length - 1]
+				if (closeByOpen[top.open] === token) {
+					stack.pop()
+				}
+			}
+		}
+
+		if (stack.length === 0) {
+			return null
+		}
+
+		const container = stack[stack.length - 1]
+		const range = this.findDelimitedRange(document, container.offset, container.open, closeByOpen[container.open])
+		const endOffset = document.offsetAt(range.end)
+		if (cursorOffset > endOffset) {
+			return null
+		}
+
+		return {
+			start: range.start,
+			inside: document.positionAt(container.offset + 1)
+		}
+	}
+
+	private async findContainingExpressionPositions(from: vscode.Position): Promise<{ start: vscode.Position, inside: vscode.Position }> {
+		const document = vscode.window.activeTextEditor.document
+		const cursorOffset = document.offsetAt(from)
+
+		const delimited = this.findContainingDelimitedExpression(document, cursorOffset)
+		if (delimited) {
+			return delimited
+		}
+
+		const wordProbe = cursorOffset > 0 ? document.positionAt(cursorOffset - 1) : from
+		const wordRange = document.getWordRangeAtPosition(from) || document.getWordRangeAtPosition(wordProbe)
+		if (wordRange && !wordRange.isEmpty) {
+			const startOffset = document.offsetAt(wordRange.start)
+			const endOffset = document.offsetAt(wordRange.end)
+			if (cursorOffset >= startOffset && cursorOffset <= endOffset) {
+				return {
+					start: wordRange.start,
+					inside: document.positionAt(Math.min(endOffset, startOffset + 1))
+				}
+			}
+		}
+
+		const smartRange = await this.getSmartSelectionRangeAt(from)
+		if (smartRange && !smartRange.isEmpty && smartRange.contains(from)) {
+			const startOffset = document.offsetAt(smartRange.start)
+			const endOffset = document.offsetAt(smartRange.end)
+			return {
+				start: smartRange.start,
+				inside: document.positionAt(Math.min(endOffset, startOffset + 1))
+			}
+		}
+
+		return null
+	}
+
 	async killNextExpression(): Promise<boolean> {
 		await vscode.commands.executeCommand("emacs.exitMarkMode")
 
@@ -298,6 +503,82 @@ export class Editor {
 		}
 
 		this.setSelection(range.start, range.end)
+		return true
+	}
+
+	async moveAfterNextExpression(): Promise<boolean> {
+		const range = await this.findNextExpressionRange(this.getCurrentPos())
+		if (!range) {
+			return false
+		}
+
+		this.setSelection(range.end, range.end)
+		return true
+	}
+
+	async selectAfterNextExpression(): Promise<boolean> {
+		const range = await this.findNextExpressionRange(this.getCurrentPos())
+		if (!range) {
+			return false
+		}
+
+		const selection = this.getSelection()
+		const anchor = selection.isEmpty ? selection.active : selection.anchor
+		this.setSelection(anchor, range.end)
+		return true
+	}
+
+	async moveBeforePreviousExpression(): Promise<boolean> {
+		const range = await this.findPreviousExpressionRange(this.getCurrentPos())
+		if (!range) {
+			return false
+		}
+
+		this.setSelection(range.start, range.start)
+		return true
+	}
+
+	async selectBeforePreviousExpression(): Promise<boolean> {
+		const range = await this.findPreviousExpressionRange(this.getCurrentPos())
+		if (!range) {
+			return false
+		}
+
+		const selection = this.getSelection()
+		const anchor = selection.isEmpty ? selection.active : selection.anchor
+		this.setSelection(anchor, range.start)
+		return true
+	}
+
+	async leaveParentExpression(): Promise<boolean> {
+		const positions = await this.findContainingExpressionPositions(this.getCurrentPos())
+		if (!positions) {
+			return false
+		}
+
+		this.setSelection(positions.start, positions.start)
+		return true
+	}
+
+	async enterNextExpression(): Promise<boolean> {
+		const range = this.findNextStructuralExpressionRange(this.getCurrentPos())
+		if (!range) {
+			return false
+		}
+
+		const document = vscode.window.activeTextEditor.document
+		const text = document.getText()
+		const startOffset = document.offsetAt(range.start)
+		const endOffset = document.offsetAt(range.end)
+
+		let insideOffset = startOffset
+		if (text.substr(startOffset, 3) === '"""') {
+			insideOffset = Math.min(endOffset, startOffset + 3)
+		} else {
+			insideOffset = Math.min(endOffset, startOffset + 1)
+		}
+
+		this.setSelection(document.positionAt(insideOffset), document.positionAt(insideOffset))
 		return true
 	}
 
