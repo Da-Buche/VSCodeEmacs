@@ -683,8 +683,14 @@
             {
                 "key": "ctrl+alt+space",
                 "mac": "ctrl+cmd+space",
-                "command": "workbench.action.toggleSidebarVisibility",
-                "when": "(!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
+                "command": "emacs.C-M-space",
+                "when": "editorTextFocus && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
+            },
+            {
+                "key": "ctrl+alt+k",
+                "mac": "ctrl+cmd+k",
+                "command": "emacs.C-M-k",
+                "when": "editorTextFocus && !editorReadonly && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
                 "key": "ctrl+x b",

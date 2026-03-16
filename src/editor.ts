@@ -105,6 +105,195 @@ export class Editor {
 		return promise
 	}
 
+	private skipWhitespaces(document: vscode.TextDocument, from: vscode.Position): vscode.Position {
+		const text = document.getText()
+		let offset = document.offsetAt(from)
+		while (offset < text.length && /\s/.test(text[offset])) {
+			offset += 1
+		}
+		return document.positionAt(offset)
+	}
+
+	private async getSmartSelectionRangeAt(position: vscode.Position): Promise<vscode.Range> {
+		const editor = vscode.window.activeTextEditor
+		const previousSelection = editor.selection
+
+		editor.selection = new vscode.Selection(position, position)
+		await vscode.commands.executeCommand("editor.action.smartSelect.expand")
+
+		const expanded = editor.selection
+		editor.selection = previousSelection
+
+		if (expanded.isEmpty) {
+			return null
+		}
+
+		return new vscode.Range(expanded.start, expanded.end)
+	}
+
+	private findDelimitedRange(document: vscode.TextDocument, startOffset: number, open: string, close: string): vscode.Range {
+		const text = document.getText()
+		let depth = 1
+		let offset = startOffset + 1
+
+		while (offset < text.length) {
+			if (text[offset] === open) {
+				depth += 1
+			} else if (text[offset] === close) {
+				depth -= 1
+				if (depth === 0) {
+					return new vscode.Range(document.positionAt(startOffset), document.positionAt(offset + 1))
+				}
+			}
+			offset += 1
+		}
+
+		return new vscode.Range(document.positionAt(startOffset), document.positionAt(text.length))
+	}
+
+	private findQuotedRange(document: vscode.TextDocument, startOffset: number, quote: string): vscode.Range {
+		const text = document.getText()
+		let offset = startOffset + quote.length
+
+		while (offset < text.length) {
+			if (quote.length === 1 && text[offset] === "\\") {
+				offset += 2
+				continue
+			}
+			if (text.substr(offset, quote.length) === quote) {
+				return new vscode.Range(document.positionAt(startOffset), document.positionAt(offset + quote.length))
+			}
+			offset += 1
+		}
+
+		return new vscode.Range(document.positionAt(startOffset), document.positionAt(text.length))
+	}
+
+	private async getBlockRangeAt(position: vscode.Position): Promise<vscode.Range> {
+		const editor = vscode.window.activeTextEditor
+		const document = editor.document
+		const line = document.lineAt(position.line)
+		const firstNonWhitespace = line.firstNonWhitespaceCharacterIndex
+
+		if (firstNonWhitespace !== position.character) {
+			return null
+		}
+
+		const foldingRanges = await vscode.commands.executeCommand<vscode.FoldingRange[]>(
+			"vscode.executeFoldingRangeProvider",
+			document.uri
+		)
+
+		if (!foldingRanges || foldingRanges.length === 0) {
+			return null
+		}
+
+		let best: vscode.FoldingRange = null
+		for (let range of foldingRanges) {
+			if (range.start !== position.line || range.end <= range.start) {
+				continue
+			}
+			if (!best || range.end < best.end) {
+				best = range
+			}
+		}
+
+		if (!best) {
+			return null
+		}
+
+		const start = line.range.start
+		const end = document.lineAt(best.end).rangeIncludingLineBreak.end
+		return new vscode.Range(start, end)
+	}
+
+	private async findNextExpressionRange(from: vscode.Position): Promise<vscode.Range> {
+		const editor = vscode.window.activeTextEditor
+		const document = editor.document
+		const text = document.getText()
+		const start = this.skipWhitespaces(document, from)
+		const startOffset = document.offsetAt(start)
+
+		if (startOffset >= text.length) {
+			return null
+		}
+
+		const nextToken = text[startOffset]
+		if (nextToken === '(') {
+			return this.findDelimitedRange(document, startOffset, '(', ')')
+		}
+		if (nextToken === '[') {
+			return this.findDelimitedRange(document, startOffset, '[', ']')
+		}
+		if (nextToken === '{') {
+			return this.findDelimitedRange(document, startOffset, '{', '}')
+		}
+		if (text.substr(startOffset, 3) === '"""') {
+			return this.findQuotedRange(document, startOffset, '"""')
+		}
+		if (nextToken === '"' || nextToken === "'") {
+			return this.findQuotedRange(document, startOffset, nextToken)
+		}
+
+		// Prefer a language-defined foldable block (Python def/for/if, etc.) when applicable.
+		const blockRange = await this.getBlockRangeAt(start)
+		if (blockRange) {
+			return blockRange
+		}
+
+		const wordRange = document.getWordRangeAtPosition(start)
+		if (wordRange && !wordRange.isEmpty) {
+			return wordRange
+		}
+
+		const smartRange = await this.getSmartSelectionRangeAt(start)
+		if (smartRange && !smartRange.start.isBefore(start)) {
+			return smartRange
+		}
+
+		const next = document.positionAt(startOffset + 1)
+		return new vscode.Range(start, next)
+	}
+
+	async killNextExpression(): Promise<boolean> {
+		await vscode.commands.executeCommand("emacs.exitMarkMode")
+
+		const startPos = this.getCurrentPos(),
+			range = await this.findNextExpressionRange(startPos)
+
+		if (!range) {
+			return false
+		}
+
+		this.setSelection(range.start, range.end)
+		const promise = this.cut(this.lastKill != null && range.start.isEqual(this.lastKill))
+
+		promise.then(() => {
+			this.justDidKill = true
+			this.lastKill = range.start
+		})
+
+		return promise
+	}
+
+	async selectNextExpression(): Promise<boolean> {
+		const range = await this.findNextExpressionRange(this.getCurrentPos())
+		if (!range) {
+			return false
+		}
+
+		const selection = this.getSelection()
+		if (!selection.isEmpty) {
+			const start = selection.start.isBefore(range.start) ? selection.start : range.start,
+				end = selection.end.isAfter(range.end) ? selection.end : range.end
+			this.setSelection(start, end)
+			return true
+		}
+
+		this.setSelection(range.start, range.end)
+		return true
+	}
+
 	async copy(): Promise<void> {
 		await vscode.env.clipboard.writeText(this.getSelectionText())
 		vscode.commands.executeCommand("emacs.exitMarkMode")

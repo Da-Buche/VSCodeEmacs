@@ -14,6 +14,12 @@ export class Operation {
             'C-k': () => {
                 this.editor.kill();
             },
+            'C-M-k': () => {
+                this.editor.killNextExpression();
+            },
+            'C-M-space': () => {
+                this.editor.selectNextExpression();
+            },
             'C-w': () => {
                 this.editor.cut()
             },
