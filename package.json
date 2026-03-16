@@ -423,6 +423,11 @@
                 "when": "editorFocus && findWidgetVisible && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
             },
             {
+                "key": "ctrl+x ctrl+x",
+                "command": "emacs.C-x_C-x",
+                "when": "editorTextFocus && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"
+            },
+            {
                 "key": "ctrl+x u",
                 "command": "emacs.C-x_u",
                 "when": "editorTextFocus && !editorReadonly && (!terminalFocus || !config.terminal.integrated.sendKeybindingsToShell)"

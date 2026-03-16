@@ -29,6 +29,9 @@ export class Operation {
             'C-y': () => {
                 this.editor.yank()
             },
+            'C-x_C-x': () => {
+                this.editor.exchangePointAndMark();
+            },
             "C-x_C-o": () => {
                 this.editor.deleteBlankLines();
             },

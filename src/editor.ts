@@ -69,6 +69,13 @@ export class Editor {
 		return vscode.window.activeTextEditor.selection.active
 	}
 
+	exchangePointAndMark(): void {
+		const editor = vscode.window.activeTextEditor,
+			selection = editor.selection;
+
+		editor.selection = new vscode.Selection(selection.active, selection.anchor);
+	}
+
 	// Kill to end of line
 	async kill(): Promise<boolean> {
 		// Ignore whatever we have selected before

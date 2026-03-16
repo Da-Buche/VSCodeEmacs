@@ -10,7 +10,7 @@ export function activate(context: vscode.ExtensionContext): void {
 
             // Edit
             "C-k", "C-M-k", "C-M-space", "C-w", "M-w", "C-y", "C-x_C-o",
-            "C-x_u", "C-/", "C-j", "C-S_bs",
+            "C-x_C-x", "C-x_u", "C-/", "C-j", "C-S_bs",
             "deleteLeft", "deleteRight",
 
             // Navigation
